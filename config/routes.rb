@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'relationships/following'
+  get 'relationships/follower'
+  get 'check_ins/index'
+  get 'check_ins/show'
+  get 'stores/show'
+  get 'users/show'
+  get 'users/edit'
   get 'home/top'
   get 'home/about'
   devise_for :users
