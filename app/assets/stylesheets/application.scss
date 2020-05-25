@@ -31,4 +31,31 @@
    margin-top: 50px;
  }
 
+ header {
+   width: 100%;
+   background-color: rgb(253, 225, 171)
+  }
+  
+  nav {
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .header__link {
+   margin: 20px 20px;
+   height: 40px;
+   font-size: 20px;
+   text-align: center;
+ }
+
+  nav > :first-child {
+    margin-top: 10px;
+    margin-left: 0;
+    margin-right: auto;
+    font-size: 40px;
+ }
+
+
+
 
