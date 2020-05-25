@@ -1,62 +1,60 @@
-<div class="container">
-  <div class="row">
-    <h2><strong>ユーザ情報登録</strong></h2>
-  </div>
+<div class="row">
+  <h2><strong>ユーザ情報登録</strong></h2>
+</div>
 
-  <div class="row registrations-row">
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{class:"form-horizontal"}) do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
+<div class="row registrations-row">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{class:"form-horizontal"}) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-      <div class="form-group">
-        <div class="col-xs-2">
-          <%= f.label :ユーザ名 %>
-        </div>
-        <div class="col-xs-4">
-          <%= f.text_field :name, autofocus: true, class: "form-control"%>
-        </div>
+    <div class="form-group">
+      <div class="col-xs-2">
+        <%= f.label :ユーザ名 %>
       </div>
+      <div class="col-xs-4">
+        <%= f.text_field :name, autofocus: true, class: "form-control"%>
+      </div>
+    </div>
 
-      <div class="form-group">
-        <div class="col-xs-2">
-          <%= f.label :メールアドレス %>
-        </div>
-        <div class="col-xs-4">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"%>
-        </div>
+    <div class="form-group">
+      <div class="col-xs-2">
+        <%= f.label :メールアドレス %>
       </div>
+      <div class="col-xs-4">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"%>
+      </div>
+    </div>
 
-      <div class="form-group">
-        <div class="col-xs-2">
-          <%= f.label :パスワード %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> 文字以上)</em>
-          <% end %>
-        </div>
-        <div class="col-xs-4">
-          <%= f.password_field :password, autocomplete: "new-password", class: "form-control"%>
-        </div>
+    <div class="form-group">
+      <div class="col-xs-2">
+        <%= f.label :パスワード %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> 文字以上)</em>
+        <% end %>
       </div>
+      <div class="col-xs-4">
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control"%>
+      </div>
+    </div>
 
-      <div class="form-group">
-        <div class="col-xs-2">
-          <%= f.label :パスワード確認用 %>
-        </div>
-        <div class="col-xs-4">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"%>
-        </div>
+    <div class="form-group">
+      <div class="col-xs-2">
+        <%= f.label :パスワード確認用 %>
       </div>
+      <div class="col-xs-4">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control"%>
+      </div>
+    </div>
 
-      <div class="actions row">
-        <div class="col-xs-4 col-xs-offset-2 text-right">
-          <%= f.submit "登録", class: "btn btn-success"%>
-        </div>
+    <div class="actions row">
+      <div class="col-xs-4 col-xs-offset-2 text-right">
+        <%= f.submit "登録", class: "btn btn-success"%>
       </div>
-    <% end %>
-      <div class="row registrations-row">
-        <div class="col-xs-4">
-          <h4>既に登録済みの方</h4>
-          <h4><%= link_to  "こちら", new_user_session_path %>   からログインしてください。</h4>
-        </div>
+    </div>
+  <% end %>
+    <div class="row registrations-row">
+      <div class="col-xs-4">
+        <h4>既に登録済みの方</h4>
+        <h4><%= link_to  "こちら", new_user_session_path %>   からログインしてください。</h4>
       </div>
-  </div>
+    </div>
 </div>
