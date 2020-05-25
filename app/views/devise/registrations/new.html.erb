@@ -2,7 +2,7 @@
   <h2><strong>ユーザ情報登録</strong></h2>
 </div>
 
-<div class="row registrations-row">
+<div class="row">
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html:{class:"form-horizontal"}) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
@@ -51,7 +51,7 @@
       </div>
     </div>
   <% end %>
-    <div class="row registrations-row">
+    <div class="row">
       <div class="col-xs-4">
         <h4>既に登録済みの方</h4>
         <h4><%= link_to  "こちら", new_user_session_path %>   からログインしてください。</h4>
