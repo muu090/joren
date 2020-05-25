@@ -2,7 +2,7 @@
   <h2><strong>ログイン</strong></h2>
 </div>
 
-<div class="row sessions-row">
+<div class="row">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name), html:{class:"form-horizontal"}) do |f| %>
     
     <div class="form-group">
@@ -29,7 +29,7 @@
       </div>
     </div>
   <% end %>
-    <div class="row sessions-row">
+    <div class="row">
       <div class="col-xs-4">
         <h4>ユーザ登録をしていない方</h4>
         <h4><%= link_to  "こちら", new_user_registration_path %>   から新規登録してください。</h4>

@@ -1,0 +1,35 @@
+<table class="table">
+  <tr><%= attachment_image_tag(user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg", size: '150x150') %></tr>
+  <tr><th><%= user.name %></th></tr>
+  <tr><th><%= user.introduction %></th></tr>
+  <tr>
+    <th>JOREN</th>
+    <th></th>
+  </tr>
+  <tr>
+    <th>Follow</th>
+    <th>
+      <%= link_to user_followings_path(user) do %>
+        <%= user.following.count %>
+      <% end %>
+    </th>
+  </tr>
+  <tr>
+    <th>Follower</th>
+    <th>
+      <%= link_to user_followers_path(user) do %>
+        <%= user.follower.count %> 
+      <% end %>
+    </th>
+  </tr>
+</table>
+
+<div>
+  <% if user.id == current_user.id %>
+	  <%= link_to 'ユーザ情報編集',edit_user_path(user.id), class: "col-xs-12 btn btn-default" %>
+  <% end %>
+</div>
+
+<div>
+	<%= link_to 'チェックイン履歴',user_check_ins_path(user.id), class: "col-xs-12 btn btn-default" %>
+</div>
