@@ -3,6 +3,7 @@ class CheckInsController < ApplicationController
   
   def index
     @user = User.find(params[:user_id])
+    @check_ins = @user.check_ins
   end
 
   def show
