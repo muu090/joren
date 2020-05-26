@@ -1,2 +1,34 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div class="row">
+  <div class="col-xs-3">
+    <%= render 'layouts/sidebar', user: @user %>
+  </div>
+
+  <div class="col-xs-8 col-xs-offset-1">
+    <p class="main-text"><strong>あなたは○○店舗のJOREN</strong></p>
+    <div class="content">
+      <h2>JOREN店舗</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>店舗名</th>
+            <th>総入店回数</th>
+            <th>最終入店日時</th>
+          </tr>
+        </thead>
+      </table>  
+    </div>
+    <div class="content">
+      <h2>JORENへの足跡</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>店舗名</th>
+            <th>総入店回数</th>
+            <th>最終入店日時</th>
+          </tr>
+        </thead>
+      </table>  
+    </div>
+  </div>
+
+</div>

@@ -1,2 +1,36 @@
-<h1>CheckIns#index</h1>
-<p>Find me in app/views/check_ins/index.html.erb</p>
+<div class="row">
+  <div class="col-xs-3">
+    <%= render 'layouts/sidebar', user: @user %>
+  </div>
+
+  <div class="col-xs-8 col-xs-offset-1">
+    <h2><strong>チェックイン履歴一覧</strong></h2>
+    <% @check_ins.each do |check_in| %>
+      <div class="col-xs-5">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>店舗名</th>
+              <th><%= check_in.store.name %></th>
+            </tr>
+            <tr>
+              <th>入店日</th>
+              <th><%= check_in.created_at %></th>
+            </tr>
+            <tr>
+              <th>入店時間</th>
+              <th><%= check_in.created_at %></th>
+            </tr>
+            <tr>
+              <th>ランク</th>
+              <th><%= check_in.user.rank %></th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="col-xs-7">
+        コメント
+      </div>
+    <% end %>
+  </div>
+</div>

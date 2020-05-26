@@ -1,17 +1,10 @@
 Rails.application.routes.draw do
-  get 'relationships/following'
-  get 'relationships/follower'
-  get 'check_ins/index'
-  get 'check_ins/show'
-  get 'stores/show'
-  get 'users/show'
-  get 'users/edit'
-  get 'home/top'
   get 'home/about'
   devise_for :users
   resources :users,only: [:show,:edit,:update,:destroy] do
+    resources :check_ins,only: [:index,:show]
     resource :relationships, only: [:create, :destroy]
-    get 'follows' => 'relationships#following', as: 'follows'
+    get 'followings' => 'relationships#following', as: 'followings'
     get 'followers' => 'relationships#follower', as: 'followers'
   end
   resources :stores,only: [:show] do
