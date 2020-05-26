@@ -4,8 +4,38 @@
 
 
 /* マップを表示する div 要素の高さを必ず明示的に指定します。 */
-#map {
-  margin: 50px auto 0;
-  height: 400px;
-  width: 600px;
+// #map {
+//   margin: 50px auto 0;
+//   height: 400px;
+//   width: 600px;
+// }
+
+.about {
+  background-color: rgba(245, 245, 245, 0.397);
+}
+
+.content {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.content-title {
+  font-size: 64px;
+  text-align: left;
+  color: #000000;
+}
+
+.border {
+  width: 47%;
+  border-bottom: 3px solid #ff9029;
+}
+
+.content-text {
+  margin: 100px 0;
+  font-size: 35px;
+  font-weight: bolder;
+  text-align: left;
+  color: #000000;
 }

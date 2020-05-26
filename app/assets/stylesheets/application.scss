@@ -22,15 +22,30 @@
    padding: 0;
    box-sizing: border-box;
  }
+ 
+ body {
+  height: 100vh;
+  background-image: url("back_image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
 
+#notice {
+  margin-top: 22px;
+  margin-right: 30px;
+  color: green;
+  font-weight: normal;
+}
 
  .row {
-   margin-top: 50px;
+   margin-top: 100px;
  }
 
  header {
    width: 100%;
-   background-color: rgb(253, 225, 171)
+   background-color: rgba(255, 255, 255, 0.6);
+   position: fixed;
   }
   
   nav {
@@ -44,7 +59,57 @@
    height: 40px;
    font-size: 20px;
    text-align: center;
- }
+  }
+
+  .logo {
+    font-weight: bolder;
+    color: black;
+  }
+  
+  .link {
+    font-weight: bold;
+    color: black;
+    display: inline-block;
+    position: relative;
+    transition-duration: 0.3s;
+    transition-property: transform;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  }
+
+  .link:before {
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+    content: '';
+    top: 100%;
+    left: 5%;
+    height: 10px;
+    width: 90%;
+    opacity: 0;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+  }
+
+  .link:hover {
+    transform: translateY(-6px);
+    animation-name: hover;
+    animation-duration: 1.5s;
+    animation-delay: 0.3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
+  
+  .link:hover:before {
+    opacity: .4;
+    transform: translateY(6px);
+    animation-duration: 1.5s;
+    animation-delay: .3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+  }
 
   nav > :first-child {
     margin-top: 10px;
@@ -58,8 +123,3 @@
    margin-top: 15px;
    margin-left: 15px;
  }
-
-
-
-
-
