@@ -301,11 +301,8 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
-<<<<<<< HEAD
-  gmaps4rails
-=======
   faker!
->>>>>>> 25e7cebe663a39c0557aefd5cddcae56ed427529
+  gmaps4rails
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

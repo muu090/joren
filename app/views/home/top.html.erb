@@ -1,24 +1,44 @@
-<<<<<<< HEAD
-<div class="container">
+<div class="row">
+  <div class="col-xs-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4><strong>店舗検索</strong></h4>
+      </div>
 
-  <div id="map"></div>
+      <ul>
+        <li>大エリア</li>
+        <li>中エリア</li>
+        <li>ジャンル</li>
+        <li>並び順（オススメ順/予算順）</li>
+        <li>検索ボタン</li>
+      </ul>
+      
+      <div class="panel-footer">
+        <p>Powered by
+          <%= link_to "http://webservice.recruit.co.jp/" do %>
+            ホットペッパー Webサービス</p>
+          <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-7">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4><strong>検索結果</strong></h4>
+      </div>
+
+      <table>
+      </table>
+    </div>
+  </div>
   
-<script>
-  function initMap() {
-    var map = new google.maps.Map(document.getElementById('map'), {
-      center: {lat: 35.6661983, lng: 139.7087553},
-      zoom: 14
-    }); 
-  }
-</script>
 
 
 
 
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA48kxM2xlWwFluhAtRQWfO3AkX8ZhlFnI&libraries=places"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA48kxM2xlWwFluhAtRQWfO3AkX8ZhlFnI&callback=initMap" async defer></script>
 </div>
-=======
-<div class="row">
-  <h1>HOME#top</h1>
-</div>
->>>>>>> 25e7cebe663a39c0557aefd5cddcae56ed427529

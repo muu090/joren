@@ -23,6 +23,7 @@
    box-sizing: border-box;
  }
 
+
  .row {
    margin-top: 50px;
  }
@@ -50,6 +51,12 @@
     margin-left: 0;
     margin-right: auto;
     font-size: 40px;
+ }
+
+ li {
+   list-style: none;
+   margin-top: 15px;
+   margin-left: 15px;
  }
 
 
