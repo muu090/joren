@@ -78,4 +78,7 @@ gem 'jquery-rails'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 
+# googleマップ表示
+gem 'gmaps4rails'
+
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'

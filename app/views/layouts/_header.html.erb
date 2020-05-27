@@ -2,19 +2,20 @@
   <div class="container">
     <nav>
       <div class="header__link">
-        <%= link_to "JOREN", root_path %>
+        <%= link_to "JOREN", root_path, class:"logo" %>
       </div>
-      
+       <div id="notice"><%= notice %></div>
+
       <% if user_signed_in? %>
-        <div class="header__link"> <%= link_to  "店舗検索", root_path %> </div>
-        <div class="header__link"> <%= link_to "ABOUT", home_about_path %> </div>
-        <div class="header__link"> <%= link_to "マイページ", user_path(current_user.id) %> </div>
-        <div class="header__link"> <%= link_to  "ログアウト", destroy_user_session_path, method: :delete%> </div>
+        <div class="header__link"> <%= link_to "店舗検索", root_path, class:"link" %> </div>
+        <div class="header__link"> <%= link_to "ABOUT", home_about_path, class:"link" %> </div>
+        <div class="header__link"> <%= link_to "マイページ", user_path(current_user.id), class:"link" %> </div>
+        <div class="header__link"> <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class:"link"%> </div>
       <% else %>
-        <div class="header__link"> <%= link_to  "店舗検索", root_path %> </div>
-        <div class="header__link"> <%= link_to "ABOUT", home_about_path %> </div>
-        <div class="header__link"> <%= link_to "ログイン", new_user_session_path %> </div>
-        <div class="header__link"> <%= link_to  "新規登録", new_user_registration_path %> </div>
+        <div class="header__link"> <%= link_to "店舗検索", root_path, class:"link" %> </div>
+        <div class="header__link"> <%= link_to "ABOUT", home_about_path, class:"link" %> </div>
+        <div class="header__link"> <%= link_to "ログイン", new_user_session_path, class:"link"%> </div>
+        <div class="header__link"> <%= link_to "新規登録", new_user_registration_path, class:"link" %> </div>
       <% end %>
     </nav>
   </div>
