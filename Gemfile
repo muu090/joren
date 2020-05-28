@@ -67,18 +67,26 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'dotenv-rails'
-group :production do
-  gem 'mysql2'
-end
 
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'jquery-rails'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'
+
+
+gem 'dotenv-rails'
+group :production do
+  gem 'mysql2'
+end
+
+
+gem "activestorage", ">= 5.2.4.3"
+gem "actionpack", ">= 5.2.4.3"
+gem "activesupport", ">= 5.2.4.3"
+
 
 # googleマップ表示
 gem 'gmaps4rails'
 
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git'
