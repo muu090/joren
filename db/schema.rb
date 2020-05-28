@@ -43,6 +43,15 @@ ActiveRecord::Schema.define(version: 2020_05_23_143153) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "opening_hours"
+    t.string "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
