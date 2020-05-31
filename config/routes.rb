@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'home/about'
+  post 'home/search' => 'home#search'
   devise_for :users
   resources :users,only: [:show,:edit,:update,:destroy] do
     resources :check_ins,only: [:index,:show]
