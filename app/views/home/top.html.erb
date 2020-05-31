@@ -4,14 +4,23 @@
       <div class="panel-heading">
         <h4><strong>店舗検索</strong></h4>
       </div>
-
-      <ul>
-        <li>大エリア</li>
-        <li>中エリア</li>
-        <li>ジャンル</li>
-        <li>並び順（オススメ順/予算順）</li>
-        <li>検索ボタン</li>
-      </ul>
+      <%= form_with url: home_search_path, method: :post, class: "form-hrizontal"  do |f| %>
+        <div class="form-group">
+          <%= f.label :大エリア %>
+          <%= f.select :large_area, {北海道: "Z0111" ,青森県: "青森県" ,岩手県: "岩手県" } %>
+        </div>
+        <div class="form-group">
+          <%= f.label :中エリア %>
+          <%= f.select :middle_area, {北海道: "Z0111" ,青森県: "青森県" ,岩手県: "岩手県" } %>
+        </div>
+        <div class="form-group">
+          <%= f.label :ジャンル %>
+          <%= f.select :genre, {北海道: "Z0111" ,青森県: "青森県" ,岩手県: "岩手県" } %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "検索ボタン" %>
+        </div>
+      <% end %>
       
       <div class="panel-footer">
         <p>Powered by
@@ -26,6 +35,8 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4><strong>検索結果</strong></h4>
+        <%= @res_data %>
+        <%= @name %>
       </div>
 
       <table>
