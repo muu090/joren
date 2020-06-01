@@ -17,7 +17,11 @@ class StoresController < ApplicationController
     uri = URI.parse("http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?" + query)
     res = Net::HTTP.get_response(uri)
     res_data = JSON.parse(res.body)
-    @shops = res_data["results"]["shop"]
+
+    results = res_data["results"]["shop"]
+    if results
+      @shops = Kaminari.paginate_array(results).page(params[:page]).per(5)
+    end
   end
     
   def show

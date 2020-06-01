@@ -35,17 +35,38 @@
       <div class="panel-heading">
         <h4><strong>検索結果</strong>   "<%= @keyword %>"</h4>
       </div>
-      <% if @shops %>
-        <% @shops.each do |shop| %>
-          <div class="panel-body">
-            <%= shop["logo_image"] %>
-            <%= shop["name"] %>
-            <%= shop["address"] %>
-            <%= shop["access"] %>
-            <%= shop["open"] %>
-          </div>
+      <div class="panel-body">
+        <% if @shops %>
+          <% @shops.each do |shop| %>
+            <div class="list-group">
+              <div class="list-group-item">ロゴ画像（準備中）</div>
+
+              <div class="list-group-item">
+                <p class="list-group-item-heading">店名</p>
+                <p class="list-group-item-text"><strong><%= shop["name"] %></strong></p>
+              </div>
+
+              <div class="list-group-item">
+                <p class="list-group-item-heading">住所</p>
+                <p class="list-group-item-text"><strong><%= shop["address"] %></strong></p>
+              </div>
+
+              <div class="list-group-item">
+                <p class="list-group-item-heading">アクセス</p>
+                <p class="list-group-item-text"><strong><%= shop["access"] %></strong></p>
+              </div>
+
+              <div class="list-group-item">
+                <p class="list-group-item-heading">営業時間</p>
+                <p class="list-group-item-text"><strong><%= shop["open"] %></strong></p>
+              </div>
+            </div>
+          <% end %>
+        <div class="panel-footer">
+          <%= paginate @shops %>
+        </div>
         <% end %>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
