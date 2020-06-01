@@ -1,10 +1,7 @@
 class CreateStores < ActiveRecord::Migration[5.2]
   def change
     create_table :stores do |t|
-      t.string :name
-      t.string :address
-      t.string :opening_hours
-      t.string :image_id
+      t.string :api_id, null: false
 
       t.timestamps
     end
