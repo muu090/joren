@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-xs-5">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4><strong>店舗検索</strong></h4>
+      </div>
+      <div class="panel-body">
+        <%= form_with url: stores_path, method: :get, local: true, class: "form-horizontal"  do |f| %>
+          <div class="form-group">
+            <div class="col-xs-4">
+              <%= f.label :キーワード検索, class: "control-label" %>
+            </div>
+            <div class="col-xs-8">
+              <%= f.text_field :keyword, class: "form-control", placeholder: "半角スペース入力で複数指定できます" %>
+            </div>
+          </div>
+
+          <div class="form-group text-center">
+            <%= f.submit "検索ボタン", class: "btn btn-success" %>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="panel-footer">
+        <p>Powered by
+          <%= link_to "http://webservice.recruit.co.jp/" do %>
+            ホットペッパー Webサービス</p>
+          <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-7">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4><strong>検索結果</strong>   "<%= @keyword %>"</h4>
+      </div>
+      <% if @shops %>
+        <% @shops.each do |shop| %>
+          <div class="panel-body">
+            <%= shop["logo_image"] %>
+            <%= shop["name"] %>
+            <%= shop["address"] %>
+            <%= shop["access"] %>
+            <%= shop["open"] %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
