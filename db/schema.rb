@@ -44,10 +44,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_143153) do
   end
 
   create_table "stores", force: :cascade do |t|
-    t.string "name"
-    t.string "address"
-    t.string "opening_hours"
-    t.string "image_id"
+    t.string "api_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
