@@ -43,7 +43,9 @@
 
               <div class="list-group-item">
                 <p class="list-group-item-heading">店名</p>
+                <%= link_to  store_path(Store.find_by(api_id: shop["id"])) do  %>
                 <p class="list-group-item-text"><strong><%= shop["name"] %></strong></p>
+                <% end %>
               </div>
 
               <div class="list-group-item">

@@ -1,2 +1,33 @@
-<h1>Stores#show</h1>
-<p>Find me in app/views/stores/show.html.erb</p>
+<div class="row">
+  <div class="panel-body">
+    <% @shop.each do |shop| %>
+      <div class="list-group">
+        <div class="list-group-item">ロゴ画像（準備中）</div>
+
+        <div class="list-group-item">
+          <p class="list-group-item-heading">店名</p>
+          <p class="list-group-item-text"><strong><%= shop["name"] %></strong></p>
+        </div>
+
+        <div class="list-group-item">
+          <p class="list-group-item-heading">住所</p>
+          <p class="list-group-item-text"><strong><%= shop["address"] %></strong></p>
+        </div>
+
+        <div class="list-group-item">
+          <p class="list-group-item-heading">アクセス</p>
+          <p class="list-group-item-text"><strong><%= shop["access"] %></strong></p>
+        </div>
+
+        <div class="list-group-item">
+          <p class="list-group-item-heading">営業時間</p>
+          <p class="list-group-item-text"><strong><%= shop["open"] %></strong></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+
+</div>
