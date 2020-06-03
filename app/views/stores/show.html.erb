@@ -43,7 +43,7 @@
             <li><%= f.submit "チェックイン", class: "btn btn-success" %></li>   
             <% end %>
         <% end %>
-          <%= link_to  user_check_ins_path(@user) do %>
+          <%= link_to  user_check_in_path(@user, store_id: params[:id]) do %>
             <li class="btn btn-default">チェックイン履歴確認</li>
           <% end %>
         </ul>

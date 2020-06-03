@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'home/about'
   devise_for :users
   resources :users,only: [:show,:edit,:update,:destroy] do
-    resources :check_ins,only: [:index,:show, :create]
+    resources :check_ins,only: [:index, :create]
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#following', as: 'followings'
     get 'followers' => 'relationships#follower', as: 'followers'
@@ -12,7 +12,8 @@ Rails.application.routes.draw do
       resource :likes, only: [:create, :destroy]
     end
   end
-  
+
+  get 'user/:user_id/stores/:store_id' => 'check_ins#show', as: 'user_check_in'
   root 'home#about'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
