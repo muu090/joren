@@ -52,7 +52,8 @@
   </div>
 </div>
 
-<div class="row">
+<div>
+<% if @check_in_today %>
   <h2><strong>NOTE</strong></h2>
 
   <table class="table table-hover table-inverse">
@@ -60,8 +61,13 @@
     <% @comments.each do |comment| %>
       <tr>
         <td> <%= comment.created_at %> </td>
+        <% if comment.user.rank == false %>
+          <td><span class="label label-primary"><%= comment.user.rank %></span></td>
+        <% else %>
+          <td><span class="label label-warning"><%= comment.user.rank %></span></td>
+        <% end %>
         <td> <%= comment.user.name %> </td>
-        <td> <%= comment.body %> </td>
+        <td> <%= comment.comment %> </td>
       </tr>
     <% end %>
     </tbody>
@@ -75,5 +81,5 @@
       <%= f.submit "送信", class: "btn btn-primary pull-right" %>
     </div>
 	<% end %>
-
+<% end %>
 </div>
