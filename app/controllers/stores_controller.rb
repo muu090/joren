@@ -56,5 +56,11 @@ class StoresController < ApplicationController
     res_data = JSON.parse(res.body)
 
     @shop = res_data["results"]["shop"]  # 検索結果のjsonデータ(配列)をまるっと格納
+
+    @comments = Comment.where(store_id: params[:id]) # store_idに(API上の)店舗idを持ったコメントを全件取得
+
+    @store = Store.find(params[:id]) # コメントフォーム用に、開いているページの店舗idを持ったStoreモデルを1件取得
+    @comment = Comment.new
+    
   end
 end

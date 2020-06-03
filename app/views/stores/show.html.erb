@@ -1,33 +1,63 @@
 <div class="row">
-  <div class="panel-body">
-    <% @shop.each do |shop| %>
-      <div class="list-group">
-        <div class="list-group-item">ロゴ画像（準備中）</div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <% @shop.each do |shop| %>
+        <div class="list-group">
+          <div class="list-group-item">ロゴ画像（準備中）</div>
 
-        <div class="list-group-item">
-          <p class="list-group-item-heading">店名</p>
-          <p class="list-group-item-text"><strong><%= shop["name"] %></strong></p>
-        </div>
+          <div class="list-group-item">
+            <p class="list-group-item-heading">店名</p>
+            <p class="list-group-item-text"><strong><%= shop["name"] %></strong></p>
+          </div>
 
-        <div class="list-group-item">
-          <p class="list-group-item-heading">住所</p>
-          <p class="list-group-item-text"><strong><%= shop["address"] %></strong></p>
-        </div>
+          <div class="list-group-item">
+            <p class="list-group-item-heading">住所</p>
+            <p class="list-group-item-text"><strong><%= shop["address"] %></strong></p>
+          </div>
 
-        <div class="list-group-item">
-          <p class="list-group-item-heading">アクセス</p>
-          <p class="list-group-item-text"><strong><%= shop["access"] %></strong></p>
-        </div>
+          <div class="list-group-item">
+            <p class="list-group-item-heading">アクセス</p>
+            <p class="list-group-item-text"><strong><%= shop["access"] %></strong></p>
+          </div>
 
-        <div class="list-group-item">
-          <p class="list-group-item-heading">営業時間</p>
-          <p class="list-group-item-text"><strong><%= shop["open"] %></strong></p>
+          <div class="list-group-item">
+            <p class="list-group-item-heading">営業時間</p>
+            <p class="list-group-item-text"><strong><%= shop["open"] %></strong></p>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
+    <div class="panel-footer"> 
+      <ul>
+        <li class="btn btn-success">チェックイン</li>
+        <li class="btn btn-default">チェックイン履歴確認</li>
+      </ul>
+    </div>
   </div>
 </div>
 
 <div class="row">
+  <h2><strong>NOTE</strong></h2>
+
+  <table class="table table-hover table-inverse">
+    <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td> <%= comment.created_at %> </td>
+        <td> <%= comment.user.name %> </td>
+        <td> <%= comment.body %> </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <%= form_with model: [@store, @comment], local: true do |f| %>
+    <div class="field">
+      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "送信", class: "btn btn-primary pull-right" %>
+    </div>
+	<% end %>
 
 </div>
