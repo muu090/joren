@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_143153) do
   create_table "check_ins", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "store_id", null: false
+    t.string "store_name"
     t.boolean "open_status", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
