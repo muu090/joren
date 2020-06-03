@@ -7,8 +7,9 @@ class CommentsController < ApplicationController
       comment = current_user.comments.new(comment_params) 
       comment.store_id = params[:store_id] 
       comment.check_in_id = checkin.last
-      comment.save
-      redirect_back(fallback_location: store_path(params[:id]))
+      if comment.save
+        redirect_back(fallback_location: store_path(params[:id]))
+      end
     end
   end
 
