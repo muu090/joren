@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get 'home/about'
   devise_for :users
   resources :users,only: [:show,:edit,:update,:destroy] do
-    resources :check_ins,only: [:index,:show]
+    resources :check_ins,only: [:index,:show, :create]
     resource :relationships, only: [:create, :destroy]
     get 'followings' => 'relationships#following', as: 'followings'
     get 'followers' => 'relationships#follower', as: 'followers'

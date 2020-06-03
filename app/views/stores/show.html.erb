@@ -29,7 +29,19 @@
     </div>
     <div class="panel-footer"> 
       <ul>
-        <li class="btn btn-success">チェックイン</li>
+      <% if @check_in_today %>
+        <% if @check_in_today.between?(@start_time, @end_time) %> 
+          <li class="btn btn-danger"> チェックイン済 </li>
+        <% else %>
+          <%= form_with url: user_check_ins_path(@user, store_id: params[:id]), method: :post, local: true do |f| %>
+          <li><%= f.submit "チェックイン", class: "btn btn-success" %></li>   
+          <% end %>   
+        <% end %>
+      <% else %>
+        <%= form_with url: user_check_ins_path(@user, store_id: params[:id]), method: :post, local: true do |f| %>
+          <li><%= f.submit "チェックイン", class: "btn btn-success" %></li>   
+          <% end %>
+      <% end %>
         <li class="btn btn-default">チェックイン履歴確認</li>
       </ul>
     </div>

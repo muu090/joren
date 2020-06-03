@@ -33,8 +33,6 @@ class StoresController < ApplicationController
           store.api_id = shop_id
           store.save! 
         end
-
-        # @store = Store.find_by(api_id: shop_id)
       end
     end
   end
@@ -56,6 +54,19 @@ class StoresController < ApplicationController
     res_data = JSON.parse(res.body)
 
     @shop = res_data["results"]["shop"]  # 検索結果のjsonデータ(配列)をまるっと格納
+ 
+    
+    check_ins = CheckIn.where(user_id: current_user.id, store_id: params[:id])
+    
+    check_ins.each do |check_in|
+      @check_in_today = check_in.created_at
+    end
+
+    @start_time = Time.zone.parse('0am')
+    @end_time = Time.current
+
+    
+    @user = current_user.id
 
     @comments = Comment.where(store_id: params[:id]) # store_idに(API上の)店舗idを持ったコメントを全件取得
 
