@@ -3,4 +3,26 @@
     <%= render 'layouts/sidebar', user: @user %>
   </div>
 
+  <div class="col-xs-8 col-xs-offset-1">
+    <h2><strong>チェックイン履歴一覧</strong></h2>
+    <% @check_ins.each do |check_in| %>
+      <table class="table check_in-table">
+        <thead>
+          <tr>
+            <th>店舗名</th>
+            <th>入店日時</th>
+            <th>ランク</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th><%= check_in.store_name %></th>
+            <th><%= check_in.created_at %></th>
+            <th><span class="label label-primary"><%= check_in.user.rank %></span></th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="check_in-comment"><strong>コメント</strong> </div>
+    <% end %>
+  </div>
 </div>

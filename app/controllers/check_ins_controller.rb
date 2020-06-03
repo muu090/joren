@@ -7,7 +7,8 @@ class CheckInsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
+    @check_ins = CheckIn.where(user_id: @user.id, store_id: params[:store_id]).order(created_at: :desc) # 最新順に表示
   end
 
   def create
