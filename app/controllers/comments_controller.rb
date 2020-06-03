@@ -1,15 +1,12 @@
 class CommentsController < ApplicationController
 
   def create
-    check_in = current_user.check_ins.where(store_id: params[:id])
-    
-    if check_in.created_at == Date.today # チェックイン当日のみコメント可能にする
-      comment = current_user.comments.new(comment_params) 
-      comment.store_id = params[:store_id] 
-      comment.check_in_id = checkin.last
-      if comment.save
-        redirect_back(fallback_location: store_path(params[:id]))
-      end
+    check_in = current_user.check_ins.find_by(store_id: params[:store_id])
+    comment = current_user.comments.new(comment_params) 
+    comment.store_id = params[:store_id] 
+    comment.check_in_id = check_in.id
+    if comment.save
+      redirect_back(fallback_location: store_path(params[:store_id]))
     end
   end
 
