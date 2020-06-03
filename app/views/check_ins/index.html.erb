@@ -11,7 +11,7 @@
           <thead>
             <tr>
               <th>店舗名</th>
-              <th><%= check_in.store.name %></th>
+              <th><%= check_in.store_name %></th>
             </tr>
             <tr>
               <th>入店日</th>
@@ -25,11 +25,12 @@
               <th>ランク</th>
               <th><%= check_in.user.rank %></th>
             </tr>
+            <tr>
+              <th>コメント</th>
+              <th><%= check_in.created_at %></th>
+            </tr>
           </thead>
         </table>
-      </div>
-      <div class="col-xs-7">
-        コメント
       </div>
     <% end %>
   </div>
