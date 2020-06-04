@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   resources :users,only: [:show,:edit,:update,:destroy] do
     resources :check_ins,only: [:index, :create]
     resource :relationships, only: [:create, :destroy]
-    get 'followings' => 'relationships#following', as: 'followings'
-    get 'followers' => 'relationships#follower', as: 'followers'
+    get 'followings' => 'relationships#follow_index', as: 'follows'
+    get 'followers' => 'relationships#follower_index', as: 'followers'
   end
   resources :stores, only: [:index, :show] do
     resources :comments, only: [:create, :destroy] do

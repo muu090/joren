@@ -30,21 +30,18 @@
     <div class="panel-footer">
       <% @shop.each do |shop| %>
         <ul>
-        <% if @check_in_today %>
-          <% if @check_in_today.between?(@start_time, @end_time) %> 
-            <li class="btn btn-danger"> チェックイン済 </li>
-          <% else %>
-            <%= form_with url: user_check_ins_path(@user, store_id: params[:id], store_name: shop["name"]), method: :post, local: true do |f| %>
-            <li><%= f.submit "チェックイン", class: "btn btn-success" %></li>   
-            <% end %>   
-          <% end %>
-        <% else %>
-          <%= form_with url: user_check_ins_path(@user, store_id: params[:id], store_name: shop["name"]), method: :post, local: true do |f| %>
-            <li><%= f.submit "チェックイン", class: "btn btn-success" %></li>   
+          <% if @check_in_today && @check_in_today.between?(@start_time, @end_time) %> 
+            <li class="btn btn-default"> チェックイン済 </li>
+            <%= link_to  user_check_in_path(@user, store_id: params[:id]) do %>
+              <li class="btn btn-primary">チェックイン履歴確認</li>
             <% end %>
-        <% end %>
-          <%= link_to  user_check_in_path(@user, store_id: params[:id]) do %>
-            <li class="btn btn-default">チェックイン履歴確認</li>
+          <% else  %>
+            <%= form_with url: user_check_ins_path(@user, store_id: params[:id], store_name: shop["name"]), method: :post, local: true do |f| %>
+              <li><%= f.submit "チェックイン", class: "btn btn-warning" %></li>   
+            <% end %>   
+            <%= link_to  user_check_in_path(@user, store_id: params[:id]) do %>
+              <li class="btn btn-primary">チェックイン履歴確認</li>
+            <% end %>
           <% end %>
         </ul>
       <% end %>
@@ -61,7 +58,8 @@
     <% @comments.each do |comment| %>
       <tr>
         <th> <%= comment.created_at %> </th>
-        <th> <%= render 'relationships/follow', user: @user %> </th>
+        <%# フォローボタン %>
+        <th> <%= render 'relationships/follow', user: comment.user %> </th>
         <% if comment.user.rank == false %>
           <th><span class="label label-primary"><%= comment.user.rank %></span></th>
         <% else %>
@@ -80,10 +78,10 @@
 
   <%= form_with model: [@store, @comment_new], local: true do |f| %>
     <div class="field">
-      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントはここに" %>
     </div>
     <div class="actions">
-      <%= f.submit "送信", class: "btn btn-primary pull-right" %>
+      <%= f.submit "書き込む", class: "btn btn-success pull-right" %>
     </div>
 	<% end %>
 </div>

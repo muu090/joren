@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_143153) do
 
   create_table "relationships", force: :cascade do |t|
     t.integer "following_id"
-    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
