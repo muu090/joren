@@ -65,7 +65,7 @@ class StoresController < ApplicationController
     @start_time = Time.zone.parse('0am')
     @end_time = Time.current
 
-    @user = current_user.id
+    @user = current_user
 
     @comments = Comment.where(store_id: params[:id]) # store_idに(API上の)店舗idを持ったコメントを全件取得
     

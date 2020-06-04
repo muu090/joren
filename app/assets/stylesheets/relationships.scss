@@ -1,3 +1,13 @@
 // Place all the styles related to the relationships controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#relationship-content {
+  padding: 15px 20px;
+  background-color: rgba(245, 245, 245, 0.397)
+}
+
+.non_following-text {
+  font-size: 18px;
+  line-height: 25px;
+}
