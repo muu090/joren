@@ -68,15 +68,16 @@
         <% end %>
         <td> <%= comment.user.name %> </td>
         <td> <%= comment.comment %> </td>
-        <span id="likes_buttons_<%= comment.id %>">
-         <%= render partial: 'likes/like', locals: {comment: comment} %>
+        <%# いいね機能を非同期通信で実装 %>
+        <span id="like_button">
+        <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
         </span>
       </tr>
     <% end %>
     </tbody>
   </table>
 
-  <%= form_with model: [@store, @comment], local: true do |f| %>
+  <%= form_with model: [@store, @comment_new], local: true do |f| %>
     <div class="field">
       <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
     </div>

@@ -55,7 +55,7 @@ class StoresController < ApplicationController
 
     @shop = res_data["results"]["shop"]  # 検索結果のjsonデータ(配列)をまるっと格納
  
-    
+    ## チェックイン機能
     check_ins = CheckIn.where(user_id: current_user.id, store_id: params[:id])
     
     check_ins.each do |check_in|
@@ -65,13 +65,16 @@ class StoresController < ApplicationController
     @start_time = Time.zone.parse('0am')
     @end_time = Time.current
 
-    
     @user = current_user.id
 
     @comments = Comment.where(store_id: params[:id]) # store_idに(API上の)店舗idを持ったコメントを全件取得
+    
+    @comments.each do |comment|
+      @comment = comment.id
+    end
 
     @store = Store.find(params[:id]) # コメントフォーム用に、開いているページの店舗idを持ったStoreモデルを1件取得
-    @comment = Comment.new
+    @comment_new = Comment.new  
     
   end
 end
