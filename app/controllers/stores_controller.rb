@@ -74,7 +74,6 @@ class StoresController < ApplicationController
     end
 
     @store = Store.find(params[:id]) # コメントフォーム用に、開いているページの店舗idを持ったStoreモデルを1件取得
-    @comment_new = Comment.new  
-    
+    @comment_new = Comment.new    
   end
 end
