@@ -52,22 +52,22 @@
   </div>
 </div>
 
-<div>
 <% if @check_in_today && @check_in_today.between?(@start_time, @end_time) %>
+<div class="note">
   <h2><strong>NOTE</strong></h2>
 
   <table class="table table-hover table-inverse">
     <tbody>
     <% @comments.each do |comment| %>
       <tr>
-        <td> <%= comment.created_at %> </td>
+        <th> <%= comment.created_at %> </th>
         <% if comment.user.rank == false %>
-          <td><span class="label label-primary"><%= comment.user.rank %></span></td>
+          <th><span class="label label-primary"><%= comment.user.rank %></span></th>
         <% else %>
-          <td><span class="label label-warning"><%= comment.user.rank %></span></td>
+          <th><span class="label label-warning"><%= comment.user.rank %></span></th>
         <% end %>
-        <td> <%= comment.user.name %> </td>
-        <td> <%= comment.comment %> </td>
+        <th> <%= comment.user.name %> </th>
+        <th> <%= comment.comment %> </th>
         <%# いいね機能を非同期通信で実装 %>
         <span id="like_button">
         <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
@@ -85,5 +85,5 @@
       <%= f.submit "送信", class: "btn btn-primary pull-right" %>
     </div>
 	<% end %>
-<% end %>
 </div>
+<% end %>
