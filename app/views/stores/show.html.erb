@@ -61,6 +61,7 @@
     <% @comments.each do |comment| %>
       <tr>
         <th> <%= comment.created_at %> </th>
+        <th> <%= render 'relationships/follow', user: @user %> </th>
         <% if comment.user.rank == false %>
           <th><span class="label label-primary"><%= comment.user.rank %></span></th>
         <% else %>
