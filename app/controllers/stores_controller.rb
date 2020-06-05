@@ -67,12 +67,11 @@ class StoresController < ApplicationController
     @start_time = Time.zone.parse('0am')
     @end_time = Time.current
 
-    @user = current_user
-
     comments = Comment.where(store_id: params[:id]) # store_idに表示されている店舗情報を持ったコメントを全件取得
     @comments = Kaminari.paginate_array(comments).page(params[:page]).per(15)  # 検索結果を1ページ当たり15件まで表示
     
     @comments.each do |comment|
+      @user = comment.user
       @comment = comment.id
     end
 

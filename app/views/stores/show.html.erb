@@ -32,14 +32,14 @@
         <ul>
           <% if @check_in_today && @check_in_today.between?(@start_time, @end_time) %> 
             <li class="btn btn-default"> チェックイン済 </li>
-            <%= link_to  user_check_in_path(@user, store_id: params[:id]) do %>
+            <%= link_to  user_check_in_path(current_user, store_id: params[:id]) do %>
               <li class="btn btn-primary">チェックイン履歴確認</li>
             <% end %>
           <% else  %>
-            <%= form_with url: user_check_ins_path(@user, store_id: params[:id], store_name: shop["name"]), method: :post, local: true do |f| %>
+            <%= form_with url: user_check_ins_path(current_user, store_id: params[:id], store_name: shop["name"]), method: :post, local: true do |f| %>
               <li><%= f.submit "チェックイン", class: "btn btn-warning" %></li>   
             <% end %>   
-            <%= link_to  user_check_in_path(@user, store_id: params[:id]) do %>
+            <%= link_to  user_check_in_path(current_user, store_id: params[:id]) do %>
               <li class="btn btn-primary">チェックイン履歴確認</li>
             <% end %>
           <% end %>
@@ -59,7 +59,9 @@
       <tr>
         <th> <%= comment.created_at %> </th>
         <%# フォローボタン %>
-        <th> <%= render 'relationships/follow', user: comment.user %> </th>
+        <th id="follow_buttons_<%= comment.user.id %>">
+        <%= render partial: 'relationships/follow', locals: {user: comment.user, comment: comment} %>
+        </th>
         <% if comment.user.rank == false %>
           <th><span class="label label-primary"><%= comment.user.rank %></span></th>
         <% else %>
@@ -67,10 +69,9 @@
         <% end %>
         <th> <%= comment.user.name %> </th>
         <th> <%= comment.comment %> </th>
-        <%# いいね機能を非同期通信で実装 %>
-        <td id="likes_button_<%= comment.id %>">
+        <th id="likes_button_<%= comment.id %>">
         <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
-        </td>
+        </th>
       </tr>
     <% end %>
     </tbody>
