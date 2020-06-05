@@ -39,6 +39,7 @@ class StoresController < ApplicationController
   
   def show
 
+    ## 店舗詳細情報を表示-Start-
     store = Store.find(params[:id]) # API上の店舗idを持ったモデル情報をパラメータのidを元に取得
     id = store.api_id  # 取得したモデル情報のapi_id(API上の店舗id)をidに代入
     
@@ -55,7 +56,8 @@ class StoresController < ApplicationController
 
     @shop = res_data["results"]["shop"]  # 検索結果のjsonデータ(配列)をまるっと格納
  
-    ## チェックイン機能
+
+    ## チェックイン機能-Start-
     check_ins = CheckIn.where(user_id: current_user.id, store_id: params[:id])
     
     check_ins.each do |check_in|
@@ -67,7 +69,8 @@ class StoresController < ApplicationController
 
     @user = current_user
 
-    @comments = Comment.where(store_id: params[:id]) # store_idに(API上の)店舗idを持ったコメントを全件取得
+    comments = Comment.where(store_id: params[:id]) # store_idに表示されている店舗情報を持ったコメントを全件取得
+    @comments = Kaminari.paginate_array(comments).page(params[:page]).per(15)  # 検索結果を1ページ当たり15件まで表示
     
     @comments.each do |comment|
       @comment = comment.id

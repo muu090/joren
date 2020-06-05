@@ -68,13 +68,14 @@
         <th> <%= comment.user.name %> </th>
         <th> <%= comment.comment %> </th>
         <%# いいね機能を非同期通信で実装 %>
-        <span id="like_button">
+        <td id="likes_button_<%= comment.id %>">
         <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
-        </span>
+        </td>
       </tr>
     <% end %>
     </tbody>
   </table>
+  <div><%= paginate @comments %></div>
 
   <%= form_with model: [@store, @comment_new], local: true do |f| %>
     <div class="field">
