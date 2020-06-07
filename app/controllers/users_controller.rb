@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @joren = @user.check_ins.group(:store_id).having('count(*) >= 20')    
+    @not_joren = @user.check_ins.group(:store_id).having('count(*) <= 19')
   end
 
   def followings
