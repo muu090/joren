@@ -30,11 +30,11 @@
           </tr>
         </tbody>
       </table>
+      <% @comments.each do |comment| %>
       <div class="check_in-comment">
-      <% if check_in.comments.exists? %>
-        <%= check_in.comments.where(check_in_id: check_in.id) %>
-      <% end %>
+        <%= comment.comment %>
       </div>
+      <% end %>
     <% end %>
   </div>
 </div>
