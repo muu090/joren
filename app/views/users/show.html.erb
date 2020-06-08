@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-xs-3">
-    <%= render 'layouts/sidebar', user: @user %>
+    <%= render 'layouts/sidebar', user: @user, joren: @joren %>
   </div>
 
   <div class="col-xs-8 col-xs-offset-1">
-    <p class="main-text"><strong>あなたは○○店舗のJOREN</strong></p>
+    <p class="main-text"><strong>あなたは<%= @joren.count %>店舗のJOREN</strong></p>
     <div class="content">
       <h2>JOREN店舗</h2>
       <table class="table">
@@ -15,6 +15,15 @@
             <th>最終入店日時</th>
           </tr>
         </thead>
+        <tbody>
+        <% @joren.each do |joren|%>
+          <tr>
+            <th><%= joren.store_name %></th>
+            <th><%= @user.check_ins.where(store_name: joren.store_name).count %></th>
+            <th><%= joren.created_at %></th>
+          </tr>
+        <% end %>
+        </tbody>
       </table>  
     </div>
     <div class="content">
@@ -27,8 +36,16 @@
             <th>最終入店日時</th>
           </tr>
         </thead>
+        <tbody>
+        <% @not_joren.each do |not_joren| %>
+          <tr>
+            <th><%= not_joren.store_name %></th>
+            <th><%= @user.check_ins.where(store_name: not_joren.store_name).count %></th>
+            <th><%= not_joren.created_at %></th>
+          </tr>
+        <% end %>
+        </tbody>
       </table>  
     </div>
   </div>
-
 </div>
