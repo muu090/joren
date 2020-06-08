@@ -19,7 +19,7 @@
         <% @joren.each do |joren|%>
           <tr>
             <th><%= joren.store_name %></th>
-            <th><%= @user.check_ins.where(store_name: joren.store_name).count %></th>
+            <th><%= @user.check_ins.where(store_id: joren.store_id).count %></th>
             <th><%= joren.created_at %></th>
           </tr>
         <% end %>
@@ -39,8 +39,12 @@
         <tbody>
         <% @not_joren.each do |not_joren| %>
           <tr>
-            <th><%= not_joren.store_name %></th>
-            <th><%= @user.check_ins.where(store_name: not_joren.store_name).count %></th>
+            <th>
+            <%= link_to store_path(Store.find(not_joren.store_id)) do%>
+            <%= not_joren.store_name %>
+            <% end %>
+            </th>
+            <th><%= @user.check_ins.where(store_id: not_joren.store_id).count %></th>
             <th><%= not_joren.created_at %></th>
           </tr>
         <% end %>
