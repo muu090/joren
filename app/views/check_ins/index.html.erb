@@ -6,6 +6,7 @@
   <div class="col-xs-8 col-xs-offset-1">
     <h2><strong>チェックイン履歴一覧</strong></h2>
     <% @check_ins.each do |check_in| %>
+    <div class="check_in-content">
       <table class="table check_in-table">
         <thead>
           <tr>
@@ -26,11 +27,13 @@
           </tr>
         </tbody>
       </table>
+      <% @comments.each do |comment| %>
       <div class="check_in-comment">
-      <% if check_in.comments.exists? %>
-        <%= check_in.comments.where(check_in_id: check_in.id) %>
-      <% end %>
+        <%= comment.comment %>
       </div>
+      <% end %>
+    </div>
     <% end %>
+    <%= paginate @check_ins %>
   </div>
 </div>
