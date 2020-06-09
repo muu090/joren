@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-xs-8 col-xs-offset-1">
-    <p class="main-text"><strong>あなたは<%= @joren.count %>店舗のJOREN</strong></p>
+    <p class="main-text"><strong>あなたは<%= @joren.length %>店舗のJOREN</strong></p>
     <div class="content">
       <h2>JOREN店舗</h2>
       <table class="table">
@@ -18,7 +18,11 @@
         <tbody>
         <% @joren.each do |joren|%>
           <tr>
-            <th><%= joren.store_name %></th>
+            <th>
+            <%= link_to store_path(Store.find(joren.store_id)) do %>
+            <%= joren.store_name %>
+            <% end %>
+            </th>
             <th><%= @user.check_ins.where(store_id: joren.store_id).count %></th>
             <th><%= joren.created_at %></th>
           </tr>
@@ -40,7 +44,7 @@
         <% @not_joren.each do |not_joren| %>
           <tr>
             <th>
-            <%= link_to store_path(Store.find(not_joren.store_id)) do%>
+            <%= link_to store_path(Store.find(not_joren.store_id)) do %>
             <%= not_joren.store_name %>
             <% end %>
             </th>
