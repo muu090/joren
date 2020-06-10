@@ -6,34 +6,39 @@
   <div class="col-xs-8 col-xs-offset-1">
     <h2><strong>チェックイン履歴一覧</strong></h2>
     <% @check_ins.each do |check_in| %>
-    <div class="check_in-content">
-      <table class="table check_in-table">
-        <thead>
-          <tr>
-            <th>店舗名</th>
-            <th>入店日時</th>
-            <th>ランク</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>
-            <%= link_to store_path(Store.find(check_in.store_id)) do %>
-              <%= check_in.store_name %>
+      <div class="check_in-content">
+        <table class="table check_in-table">
+          <thead>
+            <tr>
+              <th>店舗名</th>
+              <th>入店日時</th>
+              <th>ランク</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th id="check_in_id_<%= check_in.id %>">
+              <%= link_to user_check_in_path(@user, check_in.store_id) do %>
+                <%= check_in.store_name %>
+              <% end %>
+              </th>
+              <th id="check_in_id_<%= check_in.id %>"><%= check_in.created_at %></th>
+              <th id="check_in_id_<%= check_in.id %>"><span class="label label-primary"><%= check_in.user.rank %></span></th>
+            </tr>
+            <% @user.comments.where(check_in_id: check_in.id).each do |comment| %>
+            <tr>
+              <th class="check_in-comment_<%= comment.id %>"><%= comment.comment %> </th>
+            <%# 投稿したユーザーのみ削除ボタン表示 %>
+              <% if comment.user.id == current_user.id %>
+                <th><%= link_to "削除", store_comment_path(@check_in_store_id, comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></th>
+              <% end %>
+            </tr>
             <% end %>
-            </th>
-            <th><%= check_in.created_at %></th>
-            <th><span class="label label-primary"><%= check_in.user.rank %></span></th>
-          </tr>
-        </tbody>
-      </table>
-      <% @comments.each do |comment| %>
-      <div class="check_in-comment">
-        <%= comment.comment %>
-      </div>
-      <% end %>
-    </div>
+          </tbody>
+        </table>
+          
     <% end %>
+    </div>
     <%= paginate @check_ins %>
   </div>
 </div>

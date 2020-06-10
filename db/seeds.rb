@@ -58,31 +58,32 @@ if  User.exists? && Store.exists?
       end
     end
   end
-end
 
 
-# Joren店舗作成のためにuser_id(1)に対して、store_id(1)のcheck_inデータを20個生成
-joren_check_in_count = CheckIn.where(user_id: 1, store_id: 1).count
-while joren_check_in_count <= 20 do
-  CheckIn.create!(
-            user_id: 1,
-            store_id: 1,
-            store_name: "test",
-            open_status: true
-            )
+
+  # Joren店舗作成のためにuser_id(1)に対して、store_id(1)のcheck_inデータを20個生成
   joren_check_in_count = CheckIn.where(user_id: 1, store_id: 1).count
-end
+  while joren_check_in_count <= 20 do
+    CheckIn.create!(
+              user_id: 1,
+              store_id: 1,
+              store_name: "test",
+              open_status: true
+              )
+    joren_check_in_count = CheckIn.where(user_id: 1, store_id: 1).count
+  end
 
-# Joren店舗作成のためにuser_id(2)に対して、store_id(1)のcheck_inデータを20個生成
-joren_check_in_count = CheckIn.where(user_id: 2, store_id: 1).count
-while joren_check_in_count <= 20 do
-  CheckIn.create!(
-            user_id: 2,
-            store_id: 1,
-            store_name: "test",
-            open_status: true
-            )
+  # Joren店舗作成のためにuser_id(2)に対して、store_id(1)のcheck_inデータを20個生成
   joren_check_in_count = CheckIn.where(user_id: 2, store_id: 1).count
+  while joren_check_in_count <= 20 do
+    CheckIn.create!(
+              user_id: 2,
+              store_id: 1,
+              store_name: "test",
+              open_status: true
+              )
+    joren_check_in_count = CheckIn.where(user_id: 2, store_id: 1).count
+  end
 end
 
 
@@ -93,7 +94,7 @@ if CheckIn.exists?
     stores.each do |store|
       check_ins.each do |check_in|
         comments = Comment.all
-        comment = comments.find_or_initialize_by(check_in_id: check_in.id )
+        comment = comments.find_or_initialize_by(user_id: user.id, store_id: store.id )
         if comment.new_record?
           comment = Comment.new
           comment.user_id = user.id 
