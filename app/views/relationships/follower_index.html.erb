@@ -12,8 +12,8 @@
             <% @users.each do |user| %>
               <tr>
                 <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: '50x50') %></td>
-                <td><%= user.name %></td>
-                <td><p>JOREN：</p></td>
+                <td><%= link_to "#{user.name}", user_path(user) %></td>
+                <td><p>JOREN：<%= @joren.length %></p></td>
                 <td><p>Follow：<%= user.following.count%></p></td>
                 <td><p>Follower：<%= user.followed.count%></p></td>
                 <td><%= render 'relationships/follow', user: user %></td>
