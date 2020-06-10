@@ -11,10 +11,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    # comment = Comment.find_by(store_id: params[:id] ) # コメントと結びついた店舗モデルを1件取得
-    # comment = current_user.comments.find_by(store_id: book.id)
-    # comment.destroy
-    # redirect_back(fallback_location: store_path(params[:id]))
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_back(fallback_location: store_path(user_id: params[:user_id],store_id: params[:store_id]))
   end
 
   private

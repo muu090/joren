@@ -29,13 +29,17 @@
               </th>
               <th><%= check_in.created_at %></th>
             </tr>
+              <% @comments.each do |comment| %>
+            <tr>
+                <th class="check_in-comment"><%= comment.comment %></th>
+                <%# 投稿したユーザーのみ削除ボタン表示 %>
+                <% if comment.user.id == current_user.id %>
+                  <th><%= link_to "削除", store_comment_path(@store, comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></th>
+                <% end %>
+            </tr>
+              <% end %>
           </tbody>
-        </table>
-        <% @comments.each do |comment| %>
-          <div class="check_in-comment">
-            <%= comment.comment %>
-          </div>
-        <% end %>
+        </table>          
       <% end %>
     </div>
     <%= paginate @check_ins %>

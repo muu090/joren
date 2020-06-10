@@ -6,6 +6,7 @@ class CheckInsController < ApplicationController
     @check_ins = CheckIn.where(user_id: @user.id).page(params[:page]).order(created_at: :desc) # 最新順に表示
     @check_ins.each do |check_in|
       @comments = Comment.where(check_in_id: check_in.id)
+      @check_in_store_id = check_in.store_id
     end
   end
 
@@ -15,8 +16,9 @@ class CheckInsController < ApplicationController
     @check_ins_count = CheckIn.where(user_id: @user.id, store_id: params[:store_id]).count
     @check_in = CheckIn.find_by(user_id: @user.id, store_id: params[:store_id])
     @check_ins.each do |check_in|
-      @comments = Comment.where(check_in_id: check_in.id)
+      @comments = @user.comments.where(check_in_id: check_in.id)
     end
+    @store = Store.find(params[:store_id])
   end
 
   def create
