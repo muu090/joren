@@ -27,6 +27,14 @@ class User < ApplicationRecord
     following_user.include?(user)
   end
 
+  def joren(user)
+    user.check_ins.group(:store_id).having('count(*) >= 20') # 20個以上同じstore_idカラムが20個以上重複しているデータを配列で取得
+  end
+
+  def not_joren(user)
+    user.check_ins.group(:store_id).having('count(*) <= 19') # 同じstore_idカラムを持つレコードが19以下のデータを配列で取得
+  end
+
   attachment :profile_image, destroy: false
 
   validates :name, length: {maximum: 25, minimum: 2}

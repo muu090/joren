@@ -14,16 +14,10 @@ class RelationshipsController < ApplicationController
   def follow_index
     @user = User.find(params[:user_id])
     @users = @user.following_user
-    @users.each do |user|
-      @joren = user.check_ins.group(:store_id).having('count(*) >= 20')  # 20個以上同じstore_idカラムが20個以上重複しているデータを配列で取得
-    end
   end
   
   def follower_index
     @user = User.find(params[:user_id])
     @users = @user.followed_user
-    @users.each do |user|
-      @joren = user.check_ins.group(:store_id).having('count(*) >= 20')  # 20個以上同じstore_idカラムが20個以上重複しているデータを配列で取得
-    end
   end
 end
