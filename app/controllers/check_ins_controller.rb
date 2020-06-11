@@ -8,6 +8,7 @@ class CheckInsController < ApplicationController
       @comments = Comment.where(check_in_id: check_in.id)
       @check_in_store_id = check_in.store_id
     end
+    barrier_user(@user)
   end
 
   def show
@@ -19,6 +20,7 @@ class CheckInsController < ApplicationController
       @comments = @user.comments.where(check_in_id: check_in.id)
     end
     @store = Store.find(params[:store_id])
+    barrier_user(@user)
   end
 
   def create

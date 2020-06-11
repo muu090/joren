@@ -14,10 +14,12 @@ class RelationshipsController < ApplicationController
   def follow_index
     @user = User.find(params[:user_id])
     @users = @user.following_user
+    barrier_user(@user)
   end
   
   def follower_index
     @user = User.find(params[:user_id])
     @users = @user.followed_user
+    barrier_user(@user)
   end
 end
