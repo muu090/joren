@@ -9,9 +9,9 @@
           <%# チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示 %>
           <div class="list-group-item">
             <% if current_user.check_ins.where(store_id: params[:id]).count >= 20 %>
-              <span class="label label-warning">JOREN</span>
+              <h3><span class="label label-warning">JOREN</span></h3>
             <% else %>
-              <span class="label label-primary">NORMAL</span>
+              <h3><span class="label label-primary">NORMAL</span></h3>
             <% end %>
           </div>
 

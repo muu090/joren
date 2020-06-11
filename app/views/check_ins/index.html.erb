@@ -18,12 +18,16 @@
           <tbody>
             <tr>
               <th id="check_in_id_<%= check_in.id %>">
-              <%= link_to user_check_in_path(@user, check_in.store_id) do %>
-                <%= check_in.store_name %>
-              <% end %>
+              <%= link_to "#{check_in.store_name}", user_check_in_path(@user, check_in.store_id) %>
               </th>
               <th id="check_in_id_<%= check_in.id %>"><%= check_in.created_at %></th>
-              <th id="check_in_id_<%= check_in.id %>"><span class="label label-primary"><%= check_in.user.rank %></span></th>
+              <%# JORENランク表示 %>
+              <%# チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示 %>
+              <% if CheckIn.where(user_id: @user, store_id: check_in.store_id).count >= 20 %>
+                <th><span class="label label-warning">JOREN</span></th>
+              <% else %>
+                <th><span class="label label-primary">NORMAL</span></th>
+              <% end %>
             </tr>
             <% @user.comments.where(check_in_id: check_in.id).each do |comment| %>
             <tr>

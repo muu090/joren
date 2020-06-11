@@ -5,7 +5,13 @@
 
   <div class="col-xs-8 col-xs-offset-1">
     <h3><strong>チェックイン履歴</strong></h2>
-    <h3><span class="label label-primary"><%= @check_in.user.rank %></span></h2>
+    <%# JORENランク表示 %>
+    <%# チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示 %>
+    <% if @user.check_ins.where(store_id: params[:store_id]).count >= 20 %>
+      <h3><span class="label label-warning">JOREN</span></h3>
+    <% else %>
+      <h3><span class="label label-primary">NORMAL</span></h3>
+    <% end %>
     <%= link_to store_path(Store.find(@check_in.store_id)) do %>
     <h3><%= @check_in.store_name %></h3>
     <% end %>
