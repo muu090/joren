@@ -1,8 +1,20 @@
 <div class="row">
   <div class="panel panel-default">
     <div class="panel-body">
+      <%# 店舗情報 %>
       <% @shop.each do |shop| %>
         <div class="list-group">
+
+          <%# JORENランク表示 %>
+          <%# チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示 %>
+          <div class="list-group-item">
+            <% if current_user.check_ins.where(store_id: params[:id]).count >= 20 %>
+              <span class="label label-warning">JOREN</span>
+            <% else %>
+              <span class="label label-primary">NORMAL</span>
+            <% end %>
+          </div>
+
           <div class="list-group-item">ロゴ画像（準備中）</div>
 
           <div class="list-group-item">
@@ -25,66 +37,82 @@
             <p class="list-group-item-text"><strong><%= shop["open"] %></strong></p>
           </div>
         </div>
-      <% end %>
     </div>
     <div class="panel-footer">
-      <% @shop.each do |shop| %>
         <ul>
+          <%# 当日の0時〜現在時間までの間の値をcreated_atカラムに持つcheck_inデータがあれば"チェックイン済"、なければチェックインボタン表示 %>
           <% if @check_in_today && @check_in_today.between?(@start_time, @end_time) %> 
             <li class="btn btn-default"> チェックイン済 </li>
-            <%= link_to  user_check_in_path(current_user, store_id: params[:id]) do %>
-              <li class="btn btn-primary">チェックイン履歴確認</li>
-            <% end %>
           <% else  %>
+            <%# チェックインボタン %>
             <%= form_with url: user_check_ins_path(current_user, store_id: params[:id], store_name: shop["name"]), method: :post, local: true do |f| %>
               <li><%= f.submit "チェックイン", class: "btn btn-warning" %></li>   
-            <% end %>   
-            <%= link_to  user_check_in_path(current_user, store_id: params[:id]) do %>
-              <li class="btn btn-primary">チェックイン履歴確認</li>
-            <% end %>
+            <% end %> 
           <% end %>
+          <%# チェックイン詳細画面へのボタン %>
+          <li><%= link_to "チェックイン履歴確認", user_check_in_path(current_user, store_id: params[:id]), class: "btn btn-primary"%></li>
         </ul>
       <% end %>
     </div>
   </div>
 </div>
 
+<%# 当日の0時〜現在時間までの間の値をcreated_atカラムに持つcheck_inデータがあればコメントを表示 %>
 <% if @check_in_today && @check_in_today.between?(@start_time, @end_time) %>
-<div class="note">
-  <h2><strong>NOTE</strong></h2>
+  <div class="note">
+    <h2><strong>NOTE</strong></h2>
 
-  <table class="table table-hover table-inverse">
-    <tbody>
-    <% @comments.each do |comment| %>
-      <tr>
-        <th> <%= comment.created_at %> </th>
-        <%# フォローボタン %>
-        <th id="follow_buttons_<%= comment.user.id %>">
-        <%= render partial: 'relationships/follow', locals: {user: comment.user, comment: comment} %>
-        </th>
-        <% if comment.user.rank == false %>
-          <th><span class="label label-primary"><%= comment.user.rank %></span></th>
-        <% else %>
-          <th><span class="label label-warning"><%= comment.user.rank %></span></th>
+    <table class="table table-hover table-inverse">
+      <tbody>
+        <%# パラメータで取得した値をstore_idに持つコメントを@commentsに格納し、commentで1件ずつ取得 %>
+        <% @comments.each do |comment| %>
+          <tr>
+            <%# チェックイン日時表示 %>
+            <th> <%= comment.created_at %> </th>
+
+            <%# フォローボタン表示（非同期通信） %>
+            <th id="follow_buttons_<%= comment.user.id %>">
+            <%= render partial: 'relationships/follow', locals: {user: comment.user, comment: comment} %>
+            </th>
+
+            <%# JORENランク表示 %>
+            <%# チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示 %>
+            <% if comment.user.check_ins.where(store_id: params[:id]).count >= 20 %>
+              <th><span class="label label-warning">JOREN</span></th>
+            <% else %>
+              <th><span class="label label-primary">NORMAL</span></th>
+            <% end %>
+
+            <%# フォローしているユーザの名前にのみユーザ詳細へのリンクを設定 %>
+            <% if current_user.following?(comment.user) %>
+              <th><%= link_to  "#{comment.user.name}", user_path(comment.user) %></th>
+            <% else %>
+              <th><%= comment.user.name %></th>
+            <% end %>
+
+            <%# コメント表示 %>
+            <th> <%= comment.comment %> </th>
+
+            <%# いいねボタン/いいね数表示（非同期通信） %>
+            <th id="likes_button_<%= comment.id %>">
+              <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
+            </th>
+          </tr>
         <% end %>
-        <th> <%= comment.user.name %> </th>
-        <th> <%= comment.comment %> </th>
-        <th id="likes_button_<%= comment.id %>">
-        <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
-        </th>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-  <div><%= paginate @comments %></div>
+      </tbody>
+    </table>
 
-  <%= form_with model: [@store, @comment_new], local: true do |f| %>
-    <div class="field">
-      <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントはここに" %>
-    </div>
-    <div class="actions">
-      <%= f.submit "書き込む", class: "btn btn-success pull-right" %>
-    </div>
-	<% end %>
-</div>
+    <%# 1ページあたり15件表示のページネーション %>
+    <div><%= paginate @comments %></div>
+
+    <%# コメントフォーム %>
+    <%= form_with model: [@store, @comment_new], local: true do |f| %>
+      <div class="field">
+        <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントはここに" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "書き込む", class: "btn btn-success pull-right" %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
