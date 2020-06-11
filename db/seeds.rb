@@ -19,8 +19,8 @@ if User.count == 0
 end
 
 # Userモデルを生成
-if User.exists?(name: "赤坂 太郎") && User.count < 100
-  99.times do |n|
+if User.exists?(name: "赤坂 太郎") && User.count < 10
+  9.times do |n|
     name = Faker::JapaneseMedia::OnePiece.character
     email = Faker::Internet.email
     password = "password"
@@ -59,8 +59,6 @@ if  User.exists? && Store.exists?
     end
   end
 
-
-
   # Joren店舗作成のためにuser_id(1)に対して、store_id(1)のcheck_inデータを20個生成
   joren_check_in_count = CheckIn.where(user_id: 1, store_id: 1).count
   while joren_check_in_count <= 20 do
@@ -70,23 +68,16 @@ if  User.exists? && Store.exists?
               store_name: "test",
               open_status: true
               )
-    joren_check_in_count = CheckIn.where(user_id: 1, store_id: 1).count
-  end
-
-  # Joren店舗作成のためにuser_id(2)に対して、store_id(1)のcheck_inデータを20個生成
-  joren_check_in_count = CheckIn.where(user_id: 2, store_id: 1).count
-  while joren_check_in_count <= 20 do
     CheckIn.create!(
               user_id: 2,
               store_id: 1,
               store_name: "test",
               open_status: true
               )
-    joren_check_in_count = CheckIn.where(user_id: 2, store_id: 1).count
+    joren_check_in_count = CheckIn.where(user_id: 1, store_id: 1).count
   end
 end
-
-
+  
 
 # Commentモデルを生成
 if CheckIn.exists?
