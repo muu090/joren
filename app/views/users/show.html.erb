@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-xs-3">
-    <%= render 'layouts/sidebar', user: @user, joren: @joren %>
+    <%= render 'layouts/sidebar', user: @user %>
   </div>
 
   <div class="col-xs-8 col-xs-offset-1">
-    <p class="main-text"><strong><%= @user.name %><br><%= @joren.length %>店舗のJOREN</strong></p>
+    <p class="main-text"><strong><%= @user.name %><br><%= @user.joren(@user).length %>店舗のJOREN</strong></p>
     <div class="content">
       <h2>JOREN店舗</h2>
       <table class="table">
@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody>
-        <% @joren.each do |joren|%>
+        <% @user.joren(@user).each do |joren|%>
           <tr>
             <th>
             <%= link_to store_path(Store.find(joren.store_id)) do %>
@@ -41,7 +41,7 @@
           </tr>
         </thead>
         <tbody>
-        <% @not_joren.each do |not_joren| %>
+        <% @user.not_joren(@user).each do |not_joren| %>
           <tr>
             <th>
             <%= link_to store_path(Store.find(not_joren.store_id)) do %>
