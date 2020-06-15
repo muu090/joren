@@ -12,9 +12,7 @@
     <% else %>
       <h3><span class="label label-primary">NORMAL</span></h3>
     <% end %>
-    <%= link_to store_path(Store.find(@check_in.store_id)) do %>
-    <h3><%= @check_in.store_name %></h3>
-    <% end %>
+    <h3><%= link_to "#{@check_in.store_name}", store_path(Store.find(@check_in.store_id)) %></h3>
     <h4>総入店回数：<%= @check_ins_count %></h4>
     <h4>初回入店日時：<%= @check_ins.first.created_at %></h4>
     <div class="check_in-content">
@@ -23,21 +21,19 @@
           <thead>
             <tr>
               <th>店舗名</th>
+              <th></th>
               <th>入店日時</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th>
-              <%= link_to store_path(Store.find(check_in.store_id)) do %>
-                <%= check_in.store_name %>
-              <% end %>
-              </th>
-              <th><%= check_in.created_at %></th>
+              <th colspan="2"><%= link_to "#{check_in.store_name}", store_path(Store.find(check_in.store_id)) %></th>
+              <th colspan="2"><%= check_in.created_at %></th>
             </tr>
               <% @comments.each do |comment| %>
             <tr>
-                <th class="check_in-comment"><%= comment.comment %></th>
+                <th class="check_in-comment" colspan="3"><%= comment.comment %></th>
                 <%# 投稿したユーザーのみ削除ボタン表示 %>
                 <% if comment.user.id == current_user.id %>
                   <th><%= link_to "削除", store_comment_path(@store, comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></th>
