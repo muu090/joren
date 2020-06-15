@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.check_in_table th:first-child {
+  width: 400px;
+}
+
 .check_in-content {
   background-color: rgba(245, 245, 245, 0.397);
 }
@@ -9,6 +13,16 @@
 .check_in-table {
   margin-top: 30px;
 }
+
+.check_in-table th:first-child {
+  width: 400px;
+}
+
+.check_in-table_rank {
+  width: 113px;
+}
+
+
 
 .check_in-comment {
   min-height: 40px;

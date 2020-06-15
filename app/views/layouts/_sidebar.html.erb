@@ -1,26 +1,21 @@
+<div class="sidebar_profile_image">
+  <%= attachment_image_tag(user, :profile_image, :fill, 200, 200, format: 'jpeg', fallback: "no_image.jpg", size: '200x200') %>
+</div>
+
 <table class="table">
-  <tr><%= attachment_image_tag(user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg", size: '150x150') %></tr>
-  <tr><th><%= user.name %></th></tr>
-  <tr><th><%= user.introduction %></th></tr>
+  <tr><th colspan="2"><%= user.name %></th></tr>
+  <tr><th colspan="2"><%= user.introduction %></th></tr>
   <tr>
     <th>JOREN</th>
-    <th> <%= user.joren(user).length %> </th>
+    <th><%= user.joren(user).length %></th>
   </tr>
   <tr>
     <th>Follow</th>
-    <th>
-      <%= link_to user_follows_path(user) do %>
-        <%= user.following.count %>
-      <% end %>
-    </th>
+    <th><%= link_to "#{user.following.count}", user_follows_path(user) %></th>
   </tr>
   <tr>
     <th>Follower</th>
-    <th>
-      <%= link_to user_followers_path(user) do %>
-        <%= user.followed.count %> 
-      <% end %>
-    </th>
+    <th><%= link_to "#{user.followed.count}", user_followers_path(user) %></th>
   </tr>
 </table>
 
