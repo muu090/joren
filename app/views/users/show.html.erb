@@ -1,11 +1,11 @@
-<div class="row">
-  <div class="col-xs-3">
+<div class="content">
+  <div class="sidebar">
     <%= render 'layouts/sidebar', user: @user %>
   </div>
 
-  <div class="col-xs-8 col-xs-offset-1">
+  <div class="main">
     <p class="main-text"><strong><%= @user.name %><br><%= @user.joren(@user).length %>店舗のJOREN</strong></p>
-    <div class="content">
+    <div class="main-box">
       <h2>JOREN店舗</h2>
       <table class="table">
         <thead>
@@ -30,7 +30,7 @@
         </tbody>
       </table>  
     </div>
-    <div class="content">
+    <div class="main-box">
       <h2>JORENへの足跡</h2>
       <table class="table">
         <thead>
