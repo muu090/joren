@@ -70,9 +70,12 @@
             <%# チェックイン日時表示 %>
             <th> <%= comment.created_at %> </th>
 
-            <%# フォローボタン表示（非同期通信） %>
-            <th id="follow_buttons_<%= comment.user.id %>">
-            <%= render partial: 'relationships/follow', locals: {user: comment.user, comment: comment} %>
+            <%# コメント表示 %>
+            <th> <%= comment.comment %> </th>
+
+            <%# いいねボタン/いいね数表示（非同期通信） %>
+            <th id="likes_button_<%= comment.id %>">
+              <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
             </th>
 
             <%# JORENランク表示 %>
@@ -83,19 +86,14 @@
               <th><span class="label label-primary">NORMAL</span></th>
             <% end %>
 
-            <%# フォローしているユーザの名前にのみユーザ詳細へのリンクを設定 %>
-            <% if current_user.following?(comment.user) %>
-              <th><%= link_to  "#{comment.user.name}", user_path(comment.user) %></th>
-            <% else %>
-              <th><%= comment.user.name %></th>
-            <% end %>
+            <%# フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信） %>
+            <th id="following_user_name_<%= comment.user.id %>">
+            <%= render partial: 'relationships/following_user_link', locals: {user: comment.user, comment: comment} %>
+            </th>
 
-            <%# コメント表示 %>
-            <th> <%= comment.comment %> </th>
-
-            <%# いいねボタン/いいね数表示（非同期通信） %>
-            <th id="likes_button_<%= comment.id %>">
-              <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
+            <%# フォローボタン表示（非同期通信） %>
+            <th id="follow_buttons_<%= comment.user.id %>">
+            <%= render partial: 'relationships/follow', locals: {user: comment.user, comment: comment} %>
             </th>
           </tr>
         <% end %>
