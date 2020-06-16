@@ -86,12 +86,10 @@
               <th><span class="label label-primary">NORMAL</span></th>
             <% end %>
 
-            <%# フォローしているユーザの名前にのみユーザ詳細へのリンクを設定 %>
-            <% if current_user.following?(comment.user) %>
-              <th><%= link_to  "#{comment.user.name}", user_path(comment.user) %></th>
-            <% else %>
-              <th><%= comment.user.name %></th>
-            <% end %>
+            <%# フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信） %>
+            <th id="following_user_name_<%= comment.user.id %>">
+            <%= render partial: 'relationships/following_user_link', locals: {user: comment.user, comment: comment} %>
+            </th>
 
             <%# フォローボタン表示（非同期通信） %>
             <th id="follow_buttons_<%= comment.user.id %>">
