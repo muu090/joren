@@ -33,7 +33,13 @@
             <% @user.comments.where(check_in_id: check_in.id).each do |comment| %>
             <tr>
               <th class="check_in-comment_<%= comment.id %>" colspan="3"><%= comment.comment %> </th>
-            <%# 投稿したユーザーのみ削除ボタン表示 %>
+
+              <%# いいねボタン/いいね数表示（非同期通信） %>
+              <th id="likes_button_<%= comment.id %>">
+                <%= render partial: 'likes/like', locals: {comment: comment, store: Store.find(comment.store_id)} %>
+              </th>
+
+              <%# 投稿したユーザーのみ削除ボタン表示 %>
               <% if comment.user.id == current_user.id %>
                 <th><%= link_to "削除", store_comment_path(@check_in_store_id, comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></th>
               <% end %>
