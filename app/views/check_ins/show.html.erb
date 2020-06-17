@@ -33,11 +33,17 @@
             </tr>
               <% @comments.each do |comment| %>
             <tr>
-                <th class="check_in-comment" colspan="3"><%= comment.comment %></th>
-                <%# 投稿したユーザーのみ削除ボタン表示 %>
-                <% if comment.user.id == current_user.id %>
-                  <th><%= link_to "削除", store_comment_path(@store, comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></th>
-                <% end %>
+              <th class="check_in-comment" colspan="3"><%= comment.comment %></th>
+
+              <%# いいねボタン/いいね数表示（非同期通信） %>
+              <th id="likes_button_<%= comment.id %>">
+                <%= render partial: 'likes/like', locals: {comment: comment, store: @store} %>
+              </th>
+
+              <%# 投稿したユーザーのみ削除ボタン表示 %>
+              <% if comment.user.id == current_user.id %>
+                <th><%= link_to "削除", store_comment_path(@store, comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger" %></th>
+              <% end %>
             </tr>
               <% end %>
           </tbody>
