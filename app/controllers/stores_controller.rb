@@ -67,9 +67,21 @@ class StoresController < ApplicationController
     @start_time = Time.zone.parse('0am')
     @end_time = Time.current
 
-    comments = Comment.where(store_id: params[:id]) # store_idに表示されている店舗情報を持ったコメントを全件取得
+    @sort_status = params[:sort_status]
+    case @sort_status
+    when "1"
+      comments = Comment.where(store_id: params[:id]).reverse_order # store_idに表示されている店舗情報を持ったコメントを全件取得
+      @sort_name = "最新順"
+    when "0"
+      comments = Comment.where(store_id: params[:id]) # store_idに表示されている店舗情報を持ったコメントを全件取得
+      @sort_name = "書き込み順"
+    else
+      comments = Comment.where(store_id: params[:id]) # store_idに表示されている店舗情報を持ったコメントを全件取得
+      @sort_name = "書き込み順"
+    end
+
     @comments = Kaminari.paginate_array(comments).page(params[:page]).per(15)  # 検索結果を1ページ当たり15件まで表示
-    
+
     @comments.each do |comment|
       @user = comment.user
       @comment = comment.id
