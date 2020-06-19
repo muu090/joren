@@ -11,7 +11,7 @@
           <tbody>
             <% @users.each do |user| %>
               <tr>
-                <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg", size: '50x50') %></td>
+                <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, format: 'jpeg', fallback: "no_image.jpg", size: '50x50') %></td>
                 <%# フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信） %>
                 <td id="following_user_name_<%= user.id %>"><%= render partial: 'relationships/following_user_link', locals: {user: user} %></td>
                 <td><p>JOREN：<%= user.joren(user).length %></p></td>
