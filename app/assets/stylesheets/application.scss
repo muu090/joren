@@ -38,10 +38,6 @@
   font-weight: normal;
 }
 
- .row {
-   margin-top: 120px;
- }
-
  header {
    width: 100%;
    background-color: rgba(255, 255, 255, 0.8);
@@ -131,18 +127,11 @@
   margin-top: 150px;
 }
 
-.main {
-  flex: 1;
-  margin-left: 50px;
-}
-
 .sidebar_profile_image {
   text-align: center;
   margin-bottom: 20px;
 }
 
-@media screen and (max-width: 900px) {
-  .main {
-    margin-left: 0;
-  }
+.row {
+  margin-top: 70px;
 }

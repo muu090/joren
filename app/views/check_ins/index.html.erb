@@ -1,9 +1,9 @@
-<div class="content">
-  <div class="sidebar">
+<div class="row">
+  <div class="col-xs-12 col-md-4">
     <%= render 'layouts/sidebar', user: @user %>
   </div>
 
-  <div class="main">
+  <div class="col-xs-12 col-md-8">
     <h2><strong>チェックイン履歴一覧</strong></h2>
     <% @check_ins.each do |check_in| %>
       <div class="check_in-content">

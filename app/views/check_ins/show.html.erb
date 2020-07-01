@@ -1,9 +1,9 @@
-<div class="content">
-  <div class="sidebar">
+<div class="row">
+  <div class="col-xs-12 col-md-4">
     <%= render 'layouts/sidebar', user: @user %>
   </div>
 
-  <div class="main">
+  <div class="col-xs-12 col-md-8">
     <h3><strong>チェックイン履歴</strong></h2>
     <%# JORENランク表示 %>
     <%# チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示 %>
