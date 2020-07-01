@@ -1,9 +1,9 @@
-<div class="content">
-  <div class="sidebar">
+<div class="row">
+  <div class="col-xs-12 col-md-4">
     <%= render 'layouts/sidebar', user: @user %>
   </div>
 
-  <div class="main">
+  <div class="col-xs-12 col-md-8">
     <p class="main-text"><strong><%= @user.name %><br><%= @user.joren(@user).length %>店舗のJOREN</strong></p>
     <div class="main-box">
       <h2>JOREN店舗</h2>
