@@ -67,12 +67,14 @@
       <%= f.submit "並び替え", class: "btn btn-success" %>
     <% end %>
 
-    <table class="table table-hover table-inverse">
-      <%# フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信） %>
-      <tbody id="note_sort_<%= @sort_status %>">
-      <%= render partial: 'stores/sort', locals: {comments: @comments, store: @store} %>
-      </tbody>
-    </table>
+    <div class="table-responsive">
+      <table class="table table-hover table-inverse">
+        <%# フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信） %>
+        <tbody id="note_sort_<%= @sort_status %>">
+        <%= render partial: 'stores/sort', locals: {comments: @comments, store: @store} %>
+        </tbody>
+      </table>
+    </div>
 
     <%# 1ページあたり15件表示のページネーション %>
     <div><%= paginate @comments %></div>
