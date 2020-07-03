@@ -2,6 +2,22 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.map_container {
+  position: relative; /* 子要素の基準とする */
+  width:100%;
+  padding-top:56.25%; /* 幅の 56.25% を高さとする場合（16:9）*/
+  border: 1px solid #CCC;  
+}
+
+#gmap {
+  position: absolute; /* 親要素のパディング領域に配置 */
+  width: 100%; /* 親コンテナの幅いっぱいに表示 */
+  height: 100%; /* 親コンテナの高さいっぱいに表示 */
+  top: 0;
+  left: 0;
+}
+
+
 .note {
   padding: 10px 10px;
   background-color: rgba(255, 255, 224, 0.7);
