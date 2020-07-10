@@ -13,31 +13,31 @@ services:
     command: "bundle exec rails server -p 3000 -b '0.0.0.0'"
     tty: true
     stdin_open: true
-    depends_on: # serviseの起動順序を指定
-      - mysql # DB立ち上げ後にrailsが起動するように指定
+    # depends_on: # serviseの起動順序を指定
+    #   - mysql # DB立ち上げ後にrailsが起動するように指定
     ports:
       - "3000:3000" # ホスト環境ポート:コンテナ内部ポート
     volumes:
       - ./:/app
       - bundle_data:/usr/local/bundle
 
-  # --MySQLの設定--
-  mysql:
-    build:
-      context: ./docker/mysql # mysqlディレクトリ内のDockerfileを指定
-      dockerfile: Dockerfile 
-    environment:
-      MYSQL_ROOT_PASSWORD: "joren_root_password"
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "joren_password"
-      MYSQL_DATABASE: "joren_db"
-      TZ: 'Asia/Tokyo'
-    command: --default-authentication-plugin=mysql_native_password
-    volumes:
-      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - mysql_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+  # # --MySQLの設定--
+  # mysql:
+  #   build:
+  #     context: ./docker/mysql # mysqlディレクトリ内のDockerfileを指定
+  #     dockerfile: Dockerfile 
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: "joren_root_password"
+  #     MYSQL_USER: "root"
+  #     MYSQL_PASSWORD: "joren_password"
+  #     MYSQL_DATABASE: "joren_db"
+  #     TZ: 'Asia/Tokyo'
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   volumes:
+  #     - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+  #     - mysql_data:/var/lib/mysql
+  #   ports:
+  #     - "3306:3306"
 
 # --データ永続化領域--
 volumes:
