@@ -1,0 +1,34 @@
+- # パラメータで取得した値をstore_idに持つコメントを@commentsに格納し、commentで1件ずつ取得
+- comments.each do |comment|
+  tr
+    - # チェックイン日時表示
+    th
+      = comment.created_at
+    - # コメント表示
+    th
+      = comment.comment
+    - # いいねボタン/いいね数表示（非同期通信）
+    |  <th id="likes_button_
+    = comment.id
+    | "> 
+    = render partial: 'likes/like', locals: {comment: comment, store: store}
+    - # JORENランク表示
+    - # チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示
+    - if comment.user.check_ins.where(store_id: params[:id]).count >= 20
+      th
+        span.label.label-warning
+          | JOREN
+    - else
+      th
+        span.label.label-primary
+          | NORMAL
+    - # フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信）
+    |  <th id="following_user_name_
+    = comment.user.id
+    | "> 
+    = render partial: 'relationships/following_user_link', locals: {user: comment.user, comment: comment}
+    - # フォローボタン表示（非同期通信）
+    |  <th id="follow_buttons_
+    = comment.user.id
+    | "> 
+    = render partial: 'relationships/follow', locals: {user: comment.user, comment: comment}

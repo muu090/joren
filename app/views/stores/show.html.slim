@@ -1,0 +1,82 @@
+.row
+  .panel.panel-default
+    .panel-body
+      - # 店舗情報
+      - @shop.each do |shop|
+        .list-group
+          - # JORENランク表示
+          - # チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示
+          .list-group-item
+            - if current_user.check_ins.where(store_id: params[:id]).count >= 20
+              h3
+                span.label.label-warning
+                  | JOREN
+            - else
+              h3
+                span.label.label-primary
+                  | NORMAL
+          .list-group-item
+            = image_tag shop["photo"]["pc"]["l"]
+          .list-group-item
+            p.list-group-item-heading
+              | 店名
+            p.list-group-item-text
+              strong
+                = shop["name"]
+          .list-group-item
+            p.list-group-item-heading
+              | 住所
+            p.list-group-item-text
+              strong
+                = shop["address"]
+          .list-group-item
+            p.list-group-item-heading
+              | アクセス
+            p.list-group-item-text
+              strong
+                = shop["access"]
+          .list-group-item
+            p.list-group-item-heading
+              | 営業時間
+            p.list-group-item-text
+              strong
+                = shop["open"]
+    .panel-footer
+      ul
+        - # 当日の0時〜現在時間までの間の値をcreated_atカラムに持つcheck_inデータがあれば"チェックイン済"、なければチェックインボタン表示
+        - if @check_in_today && @check_in_today.between?(@start_time, @end_time)
+          li.btn.btn-default
+            |  チェックイン済 
+        - else
+          - # チェックインボタン
+          = form_with url: user_check_ins_path(current_user, store_id: params[:id], store_name: shop["name"]), method: :post, local: true do |f|
+            li
+              = f.submit "チェックイン", class: "btn btn-warning"
+        - # チェックイン詳細画面へのボタン
+        li
+          = link_to "チェックイン履歴確認", user_check_in_path(current_user, store_id: params[:id]), class: "btn btn-primary"
+- # 当日の0時〜現在時間までの間の値をcreated_atカラムに持つcheck_inデータがあればコメントを表示
+- if @check_in_today && @check_in_today.between?(@start_time, @end_time)
+  .note
+    h2
+      strong
+        | NOTE
+    = form_with url: store_path(params[:id]), method: :get, local: true do |f|
+      = f.select :sort_status, [["書き込み順",0],["最新順",1]], {selected: @sort_status}
+      = f.submit "並び替え", class: "btn btn-success"
+    .table-responsive
+      table.table.table-hover.table-inverse
+        - # フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信）
+        |  <tbody id="note_sort_
+        = @sort_status
+        | "> 
+        = render partial: 'stores/sort', locals: {comments: @comments, store: @store}
+    - # 1ページあたり15件表示のページネーション
+    div
+      = paginate @comments
+    - # コメントフォーム
+    = form_with model: [@store, @comment_new], local: true do |f|
+      .field
+        = f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントはここに"
+      .actions
+        = f.submit "書き込む", class: "btn btn-success pull-right"

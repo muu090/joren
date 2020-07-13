@@ -1,0 +1,31 @@
+.row
+  .col-xs-5.col-md-12
+    = attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: '200x200', class: "img-responsive sidebar_profile_image"
+  .col-xs-7.col-md-12
+    table.table
+      tr
+        th[colspan="2"]
+          = user.name
+      tr
+        th[colspan="2"]
+          = user.introduction
+      tr
+        th
+          | JOREN
+        th
+          = user.joren(user).length
+      tr
+        th
+          | Follow
+        th
+          = link_to "#{user.following.count}", user_follows_path(user)
+      tr
+        th
+          | Follower
+        th
+          = link_to "#{user.followed.count}", user_followers_path(user)
+    div
+      - if user.id == current_user.id
+        = link_to 'ユーザ情報編集',edit_user_path(user.id), class: "col-xs-12 btn btn-success"
+    div
+      = link_to 'チェックイン履歴',user_check_ins_path(user.id), class: "col-xs-12 btn btn-primary"

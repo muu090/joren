@@ -1,0 +1,5 @@
+- # フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信）
+- if current_user.following?(user)
+  = link_to  "#{user.name}", user_path(user)
+- else
+  = user.name

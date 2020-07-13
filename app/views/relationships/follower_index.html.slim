@@ -1,0 +1,95 @@
+.row
+  .col-xs-12.col-md-4
+    = render 'layouts/sidebar', user: @user
+  .col-xs-12.col-md-8
+    h2
+      strong
+        | Follower
+    #relationship-content
+      - if @users.count > 0
+        table.table
+          tbody
+            - @users.each do |user|
+              tr
+                td
+                  = attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: '50x50'
+                - # フォローしているユーザの名前にのみユーザ詳細へのリンクを設定（非同期通信）
+                |  <td id="following_user_name_
+                = user.id
+                | ">
+                = render partial: 'relationships/following_user_link', locals: {user: user}
+                td
+                  p
+                    | JOREN：
+                    = user.joren(user).length
+                td
+                  p
+                    | Follow：
+                    = user.following.count
+                td
+                  p
+                    | Follower：
+                    = user.followed.count
+                - # フォローボタン（非同期通信）
+                |  <td id="follow_buttons_
+                = user.id
+                | ">
+                = render partial: 'relationships/follow', locals: {user: user}
+      - else
+        h3
+          = @user.name
+          | さんは、
+          strong
+            | 孤独飲みマイスター
+          | です。
+        p.non_following-text
+          |  世の中には
+          strong
+            | JOREN
+          | がたくさん潜んでいます。
+          br
+          |  今あなたの横で飲んでいる彼・彼女もまたどこかの
+          strong
+            | JOREN
+          | かもしれません。
+        p.non_following-text
+          strong
+            | JOREN
+          | は数々の良店を知っています。
+          br
+          strong
+            | JOREN
+          | と繋がれば新たな世界が広がるかもしれません。
+        p.non_following-text
+          |  もちろん、1人で飲むのも至高の時間です。
+          br
+          |  しかし、
+          strong
+            | JOREN
+          | 同士で過ごす時間もまた格別ですよ。
+        p.non_following-text
+          |  孤独飲みマイスターのあなただけに特別に
+          strong
+            | JOREN
+          | との繋がり方をお伝えします。
+        p.non_following-text
+          |  ”フォローするボタンを押す”
+        p.non_following-text
+          |  どうでしょう。
+          br
+          |  「友達100人できるかな」なんて歌っていた時代が懐かしくなりましたね。
+        p.non_following-text
+          |  さて、
+          strong
+            | JOREN
+          | との繋がり方は理解いただけたかと思います。
+          br
+          |  あとはあなたの気持ち次第です。
+        p.non_following-text
+          |  さあ。。。
+          br
+          = @user.name
+          | さんが、
+          strong
+            | JOREN
+          | ライフを謳歌していただけることを願っております。

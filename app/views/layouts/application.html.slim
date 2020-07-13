@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title
+      | JOREN
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta[name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"]
+    script[src="https://kit.fontawesome.com/c436269187.js" crossorigin="anonymous"]
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    = render 'layouts/header'
+    .container
+      .row
+        = yield
+    script[type="text/javascript" src="js/jquery.min.js"]
+    script[type="text/javascript" src="js/script.js"]

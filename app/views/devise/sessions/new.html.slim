@@ -1,0 +1,23 @@
+.row
+  .devise_form
+    h2
+      strong
+        | ログイン
+    = form_for(resource, as: resource_name, url: session_path(resource_name), html:{class:"form-horizontal"}) do |f|
+      .form-group
+        = f.label "メールアドレス", class: "col-sm-3 control-label"
+        .col-sm-9
+          = f.email_field :email, autocomplete: "email", class: "form-control"
+      .form-group
+        = f.label :password, "パスワード", class: "col-sm-3 control-label"
+        .col-sm-9
+          = f.password_field :password, autocomplete: "current-password", class: "form-control"
+      .form-group
+        .col-sm-12.text-right
+          = f.submit "ログイン", class: "btn btn-success"
+    .col-sm-12
+      h4
+        | ユーザ登録をしていない方
+      h4
+        = link_to  "こちら", new_user_registration_path
+        |  から新規登録してください。
