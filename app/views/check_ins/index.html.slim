@@ -1,0 +1,55 @@
+.row
+  .col-xs-12.col-md-4
+    = render 'layouts/sidebar', user: @user
+  .col-xs-12.col-md-8
+    h2
+      strong
+        | チェックイン履歴一覧
+    - @check_ins.each do |check_in|
+      .check_in-content
+        table.table.check_in-table
+          thead
+            tr
+              th
+                | 店舗名
+              th
+              th
+                | 入店日時
+              th
+                | ランク
+          tbody
+            tr
+              |  <th id="check_in_id_
+              = check_in.id
+              | " colspan="2"> 
+              = link_to "#{check_in.store_name}", user_check_in_path(@user, check_in.store_id)
+              |  <th id="check_in_id_
+              = check_in.id
+              | ">
+              = check_in.created_at
+              - # JORENランク表示
+              - # チェックイン回数が20回以上であれば"JOREN"、満たなければ"NORMAL"を表示
+              - if CheckIn.where(user_id: @user, store_id: check_in.store_id).count >= 20
+                th.check_in-table_rank
+                  span.label.label-warning
+                    | JOREN
+              - else
+                th
+                  span.label.label-primary
+                    | NORMAL
+            - @user.comments.where(check_in_id: check_in.id).each do |comment|
+              tr
+                |  <th class="check_in-comment_
+                = comment.id
+                | " colspan="3">
+                = comment.comment
+                - # いいねボタン/いいね数表示（非同期通信）
+                |  <th id="likes_button_
+                = comment.id
+                | "> 
+                = render partial: 'likes/like', locals: {comment: comment, store: Store.find(comment.store_id)}
+                - # 投稿したユーザーのみ削除ボタン表示
+                - if comment.user.id == current_user.id
+                  th
+                    = link_to "削除", store_comment_path(@check_in_store_id, comment), method: :delete, data: {confirm: "本当に削除してもよろしいですか？"}, class: "btn-sm btn-danger"
+  = paginate @check_ins

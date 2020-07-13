@@ -1,0 +1,25 @@
+.row
+  .col-xs-12.col-md-4
+    = render 'layouts/sidebar', user: @user
+  .col-xs-12.col-md-8
+    h2
+      strong
+        | ユーザ情報編集
+    = form_for(@user, html:{class:"form-horizontal edit-form"}) do |f|
+      .form-group
+        .col-xs-3
+          = f.label :プロフィール画像
+        .col-xs-4
+          = f.attachment_field :profile_image
+      .form-group
+        .col-xs-3
+          = f.label :ユーザ名
+        .col-xs-4
+          = f.text_field :name, class: "form-control"
+      .form-group
+        .col-xs-3
+          = f.label :紹介文
+        .col-xs-7
+          = f.text_area :introduction, class: "form-control"
+      .actions
+        = f.submit "更新", class: "btn btn-success col-xs-offset-9"

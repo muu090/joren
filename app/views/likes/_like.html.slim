@@ -1,0 +1,8 @@
+- if comment.liked_by?(current_user)
+  = link_to store_comment_likes_path(store_id: store.id, comment_id: comment.id), method: :delete, remote: true do
+    i.fa.fa-heart[aria-hidden="true" style="color: red;"]
+    = comment.likes.count
+- else
+  = link_to store_comment_likes_path(store_id: store.id, comment_id: comment.id), method: :post, remote: true do
+    i.fa.fa-heart-o[aria-hidden="true"]
+    = comment.likes.count
